@@ -1,4 +1,9 @@
-## Update
+
+# Siren
+
+### Notify users when a new version of your app is available, and prompt them with the App Store link.
+
+### Update
 
 ### Added compatibility for enterprise apps. There are 3 public variables added: 'isEnterpriseVersion', 'enterpriseDownloadURL', 'enterpriseVersionURL'
 
@@ -7,16 +12,15 @@
 - You also have to set the 'enterpriseVersionURL' which is a url string to a JSON that states where your app collects the newest version number. 
 - The JSON should look like so:
 
-```{
+
+```
+{
  "resultCount":1,
  "results": 
     	[{"version":"3.0.2"}]
 }
 ```
 
-# Siren
-
-### Notify users when a new version of your app is available, and prompt them with the App Store link.
 
 ---
 ### About
