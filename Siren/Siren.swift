@@ -208,6 +208,20 @@ public class Siren: NSObject
     */
     public var alertControllerTintColor: UIColor?
     
+    
+    /**
+        Enterprise version variables
+        The enterprise version URL should be a JSON file that looks like this:
+            {
+                "resultCount":1,
+                "results":
+                    [{"version":"3.0.2"}]
+            }
+    */
+    public var isEnterpriseVersion = false
+    public var enterpriseVersionURL : String?
+    public var enterpriseDownloadURL : String?
+    
     // Private
     private var lastVersionCheckPerformedOnDate: NSDate?
     private var currentAppStoreVersion: String?
@@ -236,8 +250,10 @@ public class Siren: NSObject
     */
     public func checkVersion(checkType: SirenVersionCheckType) {
         
-        if (appID == nil) {
+        if (appID == nil && !isEnterpriseVersion) {
             println("[Siren] Please make sure that you have set 'appID' before calling checkVersion.")
+        } else if isEnterpriseVersion && (enterpriseVersionURL == nil || enterpriseDownloadURL == nil) {
+            println("[Siren] Please make sure that you have set 'enterpriseVersionURL' and 'enterpriseDownloadURL' before calling checkVersion.")
         } else {
             if checkType == .Immediately {
                 performVersionCheck()
@@ -256,8 +272,13 @@ public class Siren: NSObject
     private func performVersionCheck() {
         
         // Create Request
-        let itunesURL = iTunesURLFromString()
-        let request = NSMutableURLRequest(URL: itunesURL)
+        let url : NSURL!
+        if isEnterpriseVersion {
+            url = NSURL(string: enterpriseVersionURL!)
+        } else {
+            url = iTunesURLFromString()
+        }
+        let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         
         // Perform Request
@@ -519,8 +540,13 @@ private extension Siren
     
     // Actions
     func launchAppStore() {
-        let iTunesString =  "https://itunes.apple.com/app/id\(appID!)";
-        let iTunesURL = NSURL(string: iTunesString);
+        let urlString : String!
+        if isEnterpriseVersion {
+            urlString = enterpriseDownloadURL
+        } else {
+            urlString = "https://itunes.apple.com/app/id\(appID!)"
+        }
+        let iTunesURL = NSURL(string: urlString);
         UIApplication.sharedApplication().openURL(iTunesURL!);
     }
 }
