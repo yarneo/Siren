@@ -1,3 +1,19 @@
+## Update
+
+### Added compatibility for enterprise apps. There are 3 public variables added: 'isEnterpriseVersion', 'enterpriseDownloadURL', 'enterpriseVersionURL'
+
+- To enable enterprise version, you have to set the boolean of 'isEnterpriseVersion' to true.
+- Once it is enabled you have to set the 'enterpriseDownloadURL' which is the url string of where your enterprise app can be downloaded from
+- You also have to set the 'enterpriseVersionURL' which is a url string to a JSON that states where your app collects the newest version number. 
+- The JSON should look like so:
+
+```{
+ "resultCount":1,
+ "results": 
+    	[{"version":"3.0.2"}]
+}
+```
+
 # Siren
 
 ### Notify users when a new version of your app is available, and prompt them with the App Store link.
