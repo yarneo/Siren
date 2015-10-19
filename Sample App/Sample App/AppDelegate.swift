@@ -8,6 +8,27 @@
 
 import UIKit
 
+extension AppDelegate: SirenDelegate
+{
+    func sirenDidShowUpdateDialog() {
+        print("sirenDidShowUpdateDialog")
+    }
+
+    func sirenUserDidCancel() {
+        print("sirenUserDidCancel")
+    }
+
+    func sirenUserDidSkipVersion() {
+        print("sirenUserDidSkipVersion")
+    }
+
+    func sirenUserDidLaunchAppStore() {
+        print("sirenUserDidLaunchAppStore")
+        exit(0)
+    }
+
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -28,8 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Required
         siren.isEnterpriseVersion = true
-        siren.enterpriseDownloadURL = "link_to_app"
-        siren.enterpriseVersionURL = "link_to_version"
+        siren.enterpriseDownloadURL = /* enter link to plist for your enterprise app here */
+        siren.enterpriseVersionURL =/* enter link to json file that shows current version here */
         
         // Optional
         siren.delegate = self
@@ -54,28 +75,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-extension AppDelegate: SirenDelegate
-{
-    func sirenDidShowUpdateDialog() {
-        println("sirenDidShowUpdateDialog")
-    }
-    
-    func sirenUserDidCancel() {
-        println("sirenUserDidCancel")
-    }
-    
-    func sirenUserDidSkipVersion() {
-        println("sirenUserDidSkipVersion")
-    }
-    
-    func sirenUserDidLaunchAppStore() {
-        println("sirenUserDidLaunchAppStore")
-    }
-    
-    /**
-        This delegate method is only hit when alertType is initialized to .None
-    */
-    func sirenDidDetectNewVersionWithoutAlert(message: String) {
-        println("\(message)")
-    }
-}

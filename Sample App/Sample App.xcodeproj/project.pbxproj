@@ -105,6 +105,8 @@
 		8EC391791A58B465001C121E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Sabintsev iOS Projects";
 				TargetAttributes = {
