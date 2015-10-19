@@ -15,12 +15,12 @@
 
 ```
 {
- "resultCount":1,
  "results": 
-    	[{"version":"3.0.2"}]
+    [{"version":"1.27", "forced":"yes"}]
 }
 ```
 
+If forced is "yes", users wont be able to cancel the update. If you want the option to cancel, put "forced" as "no".
 
 ---
 ### About
